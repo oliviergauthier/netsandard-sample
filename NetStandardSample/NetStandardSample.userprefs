@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{A9B0D250-4375-442D-A76E-2F5AD4B7AADE}|Default">
+  <MonoDevelop.Ide.ItemProperties.NetStandardSample.XUnit.Tests PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NetStandardSample.XUnit.Tests/PersonXUnitTest.cs">
+    <Files>
+      <File FileName="NetStandardSample.NUnit.Tests/PersonNUnitTest.cs" Line="15" Column="1" />
+      <File FileName="NetStandardSample.XUnit.Tests/PersonXUnitTest.cs" Line="11" Column="10" />
+    </Files>
+    <Pads>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="NetStandardSample" expanded="True">
+            <Node name="NetStandardSample.NUnit.Tests" expanded="True">
+              <Node name="NetStandardSample" expanded="True">
+                <Node name="NUnit" expanded="True">
+                  <Node name="Tests" expanded="True">
+                    <Node name="PersonNUnitTest" expanded="True">
+                      <Node name="Test_FullName_ReturnsFirstNameAndLastName_WithNUnit" selected="True" />
+                    </Node>
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/ogauthier/tmp/netsandard-sample/NetStandardSample/NetStandardSample.XUnit.Tests/PersonTest.cs" relfile="NetStandardSample.XUnit.Tests/PersonTest.cs" line="10" column="1" />
+      <Breakpoint file="/Users/ogauthier/tmp/netsandard-sample/NetStandardSample/NetStandardSample.NUnit.Tests/PersonTest.cs" relfile="NetStandardSample.NUnit.Tests/PersonTest.cs" line="10" column="1" />
+      <Breakpoint file="/Users/ogauthier/tmp/netsandard-sample/NetStandardSample/NetStandardSample.NUnit.Tests/PersonNUnitTest.cs" relfile="NetStandardSample.NUnit.Tests/PersonNUnitTest.cs" line="10" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

@@ -1,0 +1,7 @@
+NetStandardSample/.vscode
+NetStandardSample/NetStandardSample.NUnit.Tests/bin
+NetStandardSample/NetStandardSample.NUnit.Tests/obj
+NetStandardSample/NetStandardSample.XUnit.Tests/bin
+NetStandardSample/NetStandardSample.XUnit.Tests/obj
+NetStandardSample/NetStandardSample/bin
+NetStandardSample/NetStandardSample/obj
