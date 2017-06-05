@@ -4,7 +4,7 @@
 
 - **Parce que c'est le nouveau format officiel :**
 
-   Le format PCL est amené à disparaitre à plus ou moins long terme et à être remplacé par le .NetStandard     
+   Le format PCL avec package.config est amené à disparaitre à plus ou moins long terme et à être remplacé par le .NetStandard et le format PackageReference directement dans le csproj 
 
 - **Mise à jour de lib tiers :**
 
@@ -122,7 +122,7 @@
 
    Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
 
-- ** Création d'un projet de test NUnit**
+- **Création d'un projet de test NUnit**
 
    Cette fois ci rien n'est proposé. Il faut créer un projet .NetStandard (voir ci-dessus) et modifier le fichier csproj de la façon suivante : 
 
@@ -143,13 +143,19 @@
 
    Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug.
 
-- ** Lignes de commande
+- **Outils en ligne de commande**
 
-   **Build** : Pour builder un projet de ce type il faut utiliser msbuild à la place de xbuild.
+   *Build* : Pour builder un projet de ce type il faut utiliser msbuild à la place de xbuild.
 
-        xbuild project.sln
+        msbuild project.sln
 
-   **Lancement des tests** : Il faut utiliser l'outil dotnet
+   *Lancement des tests* : Il faut utiliser l'outil dotnet
 
         dotnet restore
         dotnet test project.Tests.csproj
+
+
+
+
+https://github.com/nunit/dotnet-test-nunit
+http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/
