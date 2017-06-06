@@ -215,7 +215,62 @@
 
 - **Création d'un projet Application Mobile + Xamarin Forms**
 
-   Il faut commencer par créer un projet *Blank Forms App* puis convertir la partie PCL en .NetStandard (voir ci-dessus).
+  1. Shared : 
+      
+      Il faut commencer par créer un projet *Blank Forms App*. Si on convertie en projet .NetStandard (voir ci-dessus) on va avoir une erreur car *Xamarin.Forms* actuellement présent dans le projet n'est pas compatible. Le plus simple est de supprimer la dépendance *Xamarin.Forms*, de convertir le projet comme ci-dessus puis de rajouter *Xamarin.Forms*
+  
+  2. Android : 
+
+      VS for mac ne propose rien pour le faire depuis l'IDE. Il faut le faire à la main. Pour cela il faut supprimer toutes les références à *Xamarin.Forms* dans le csproj, et ajouter le fichier project.json
+
+Supprimer les lignes référencant une dll provenant du répertoire *../packages/* :
+```xml
+<Reference Include="Xamarin.Android.Support.v4">
+  <HintPath>..\packages\Xamarin.Android.Support.v4.23.3.0\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+</Reference>
+[...]
+  ```
+
+Supprimer les imports de targets provenant du même dossier :
+```xml
+  <Import Project="..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
+```
+
+Ajouter le fichier projet.json suivant :
+```json
+{
+  "dependencies": {
+    "Xamarin.Forms": "2.3.4.247"
+  },
+  "frameworks": {
+    "MonoAndroid,Version=v7.1": {}
+  },
+  "runtimes": {
+    "win": {}
+  }
+}
+```
+
+   3. iOS
+
+      Comme pour android il faut supprimer les références à *Xamarin.Forms* dans le fichier *csproj* puis ajouter le fichier *project.json* suivant :
+
+```json
+{
+  "dependencies": {
+    "Xamarin.Forms": "2.3.4.247"
+  },
+  "frameworks": {
+    "Xamarin.iOS,Version=v1.0": {}
+  },
+  "runtimes": {
+    "win": {},
+    "win-x86": {}
+  }
+}
+```
+
+      
 
 - **Outils en ligne de commande**
 
@@ -230,6 +285,7 @@
 
 
 
+https://oren.codes/2016/02/08/project-json-all-the-things/
 https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
 
 https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution
