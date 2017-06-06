@@ -179,6 +179,72 @@
         dotnet restore
         dotnet test project.Tests.csproj
 
+## Format project.json
+
+- **Création d'une lib**
+
+   VS for mac ne propose pas de template pour le faire. Il faut créer une lib PCL puis la convertir en .NetStandard via *Options > Build > General > Target Framework* et sélectionner netstandard1.4 par exemple.
+   
+- **Création d'une lib utilisant Xamarin Forms**
+
+   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut ajouter une config dans le csproj pour que ça fonctionne. Il faut ajouter le 'PackageTargetFallback'
+
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netstandard1.4</TargetFramework>
+      <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+      <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
+    </ItemGroup>
+  </Project>
+
+   ```
+
+
+- **Création d'un projet de test XUnit**
+
+   Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
+
+- **Création d'un projet de test NUnit**
+
+   Cette fois ci rien n'est proposé. Il faut créer un projet .NetStandard (voir ci-dessus) et modifier le fichier csproj de la façon suivante : 
+
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <OutputType>Exe</OutputType>
+            <TargetFramework>netcoreapp1.1</TargetFramework>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+            <PackageReference Include="NUnit" Version="3.6.0" />
+            <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
+        </ItemGroup>
+    </Project>
+   ```
+
+   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug. De plus je n'ai pas vu de fichier de résultat des tests dans TestResult.xml non plus
+
+- **Création d'un projet Application Mobile + Xamarin Forms**
+
+
+
+- **Outils en ligne de commande**
+
+   *Build* : Pour builder un projet de ce type il faut utiliser msbuild à la place de xbuild.
+
+        msbuild project.sln
+
+   *Lancement des tests* : Il faut utiliser l'outil dotnet
+
+        dotnet restore
+        dotnet test project.Tests.csproj
 
 
 
