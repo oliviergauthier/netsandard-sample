@@ -1,5 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SampleWithForms/project.json">
+    <Files>
+      <File FileName="Sample/project.json" Line="9" Column="2" />
+      <File FileName="SampleWithForms/project.json" Line="12" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
