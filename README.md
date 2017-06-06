@@ -166,7 +166,7 @@
 
 - **Création d'un projet Application Mobile + Xamarin Forms**
 
-
+   TODO
 
 - **Outils en ligne de commande**
 
@@ -187,53 +187,35 @@
    
 - **Création d'une lib utilisant Xamarin Forms**
 
-   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut ajouter une config dans le csproj pour que ça fonctionne. Il faut ajouter le 'PackageTargetFallback'
+   Pour les même raison que précédement, il faut rajouter une configuration dans le project.json pour pouvoir ajouter Xamarin Forms dans un projet de ce type
 
-   ```xml
-   <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-      <TargetFramework>netstandard1.4</TargetFramework>
-      <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-      <DebugType>full</DebugType>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
-    </ItemGroup>
-  </Project>
-
-   ```
+```json
+{
+  "dependencies": {
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+    "NETStandard.Library": "1.6.0",
+    "Xamarin.Forms": "2.3.4.247"
+  },
+  "frameworks": {
+    "netstandard1.4": {
+      "imports": "portable-net45+win8+wpa81+wp8"
+    }
+  }
+}
+```
 
 
 - **Création d'un projet de test XUnit**
 
-   Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
+   TODO
 
 - **Création d'un projet de test NUnit**
 
-   Cette fois ci rien n'est proposé. Il faut créer un projet .NetStandard (voir ci-dessus) et modifier le fichier csproj de la façon suivante : 
-
-   ```xml
-   <Project Sdk="Microsoft.NET.Sdk">
-        <PropertyGroup>
-            <OutputType>Exe</OutputType>
-            <TargetFramework>netcoreapp1.1</TargetFramework>
-        </PropertyGroup>
-
-        <ItemGroup>
-            <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-            <PackageReference Include="NUnit" Version="3.6.0" />
-            <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
-        </ItemGroup>
-    </Project>
-   ```
-
-   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug. De plus je n'ai pas vu de fichier de résultat des tests dans TestResult.xml non plus
+   Il y avait un projet de runner ([NUnit 3 Test Runner for .NET Core](https://github.com/nunit/dotnet-test-nunit)) pour ce format mais il n'a pas été finalisé et a été abandonné pour le nouveau format PackageReference. [See Rob Prouse Post](http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/)
 
 - **Création d'un projet Application Mobile + Xamarin Forms**
 
-
+   Il faut commencer par créer un projet *Blank Forms App* puis convertir la partie PCL en .NetStandard (voir ci-dessus).
 
 - **Outils en ligne de commande**
 
@@ -247,9 +229,6 @@
         dotnet test project.Tests.csproj
 
 
-
-https://github.com/nunit/dotnet-test-nunit
-http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/
 
 https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
 
