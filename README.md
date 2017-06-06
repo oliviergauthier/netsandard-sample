@@ -118,6 +118,27 @@
 
    Pour ce type de projet, VS for mac propose un template fonctionnel *Add New Project > .Net Core > Library > .Net Standard Library*
 
+- **Création d'une lib utilisant Xamarin Forms**
+
+   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut ajouter une config dans le csproj pour que ça fonctionne. Il faut ajouter le 'PackageTargetFallback'
+
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netstandard1.4</TargetFramework>
+      <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+      <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
+    </ItemGroup>
+  </Project>
+
+   ```
+
+
 - **Création d'un projet de test XUnit**
 
    Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
@@ -141,7 +162,11 @@
     </Project>
    ```
 
-   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug.
+   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug. De plus je n'ai pas vu de fichier de résultat des tests dans TestResult.xml non plus
+
+- **Création d'un projet Application Mobile + Xamarin Forms**
+
+
 
 - **Outils en ligne de commande**
 
@@ -159,3 +184,7 @@
 
 https://github.com/nunit/dotnet-test-nunit
 http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/
+
+https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
+
+https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution

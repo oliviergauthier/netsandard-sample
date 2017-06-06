@@ -1,11 +1,13 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStandardSample", "NetStandardSample\NetStandardSample.csproj", "{28FFF8C9-5E3B-4B80-926F-8E284D3BDFE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{28FFF8C9-5E3B-4B80-926F-8E284D3BDFE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStandardSample.XUnit.Tests", "NetStandardSample.XUnit.Tests\NetStandardSample.XUnit.Tests.csproj", "{A9B0D250-4375-442D-A76E-2F5AD4B7AADE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.XUnit.Tests", "Sample.XUnit.Tests\Sample.XUnit.Tests.csproj", "{A9B0D250-4375-442D-A76E-2F5AD4B7AADE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetStandardSample.NUnit.Tests", "NetStandardSample.NUnit.Tests\NetStandardSample.NUnit.Tests.csproj", "{A8688D74-F012-494D-893E-AAC235B50C7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.NUnit.Tests", "Sample.NUnit.Tests\Sample.NUnit.Tests.csproj", "{A8688D74-F012-494D-893E-AAC235B50C7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWithForms", "SampleWithForms\SampleWithForms.csproj", "{A94A6C86-2756-48AB-9E98-27521143D86C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,5 +27,9 @@ Global
 		{A8688D74-F012-494D-893E-AAC235B50C7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8688D74-F012-494D-893E-AAC235B50C7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8688D74-F012-494D-893E-AAC235B50C7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A94A6C86-2756-48AB-9E98-27521143D86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94A6C86-2756-48AB-9E98-27521143D86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94A6C86-2756-48AB-9E98-27521143D86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94A6C86-2756-48AB-9E98-27521143D86C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
