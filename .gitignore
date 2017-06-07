@@ -5,3 +5,4 @@ packages/
 
 .vscode
 project.lock.json
+*.userprefs
