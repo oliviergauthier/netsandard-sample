@@ -8,26 +8,26 @@
 
 - **Mise à jour de lib tiers :**
 
-   Beaucoup de libs tiers adoptent le .NetStandard en version 1.3 et suppérieur et ne peuvent plus être mises à jour sur des projets PCL même 111
+   Beaucoup de libs tiers adoptent le .NetStandard en version 1.3 et suppérieur et ne peuvent plus être mises à jour sur des projets PCL
 
 - **Simplification de la gestion des dépendances :**
 
-   Avec l'ancien format utilisant le fichier 'package.config', nous sommes obligé de déclarer les dépendances transitive. Si A dépend de B et de C alors dans le package.config, A, B et C seront déclarées. Avec les nouveaux formats (project.json ou PackageReference), nous n'avons plus besoin de déclarer les dépendances transitives
+   Avec l'ancien format utilisant le fichier 'package.config', nous sommes obligé de déclarer les dépendances transitives. Si A dépend de B et de C alors dans le package.config, A, B et C seront déclarées. Avec les nouveaux formats (project.json ou PackageReference), nous n'avons plus besoin de déclarer les dépendances transitives
 
 - **Facilitation lors des merges :**
 
-   Avec l'ancien format les dépendances sont déclarées dans le fichier 'package.config', et des références vers chaques dll du package sont ajoutées dans le fichier csproj. Dans le cadre de gros projet, cela pose souvant des problème lors des merges et si on ne fait pas bien attention on peut se retrouver avec des incohérences. Le nouveau format définie les dépendance à un seul endroit (project.json ou csproj) et en version simple. Les merges sont donc simplifiés
+   Avec l'ancien format les dépendances sont déclarées dans le fichier 'package.config', et des références vers chaques dll du package sont ajoutées dans le fichier csproj. Dans le cadre de gros projets, cela pose souvant des problèmes lors des merges et si on ne fait pas bien attention on peut se retrouver avec des incohérences. Les nouveaux formats définie les dépendances à un seul endroit (project.json ou csproj) et en version simple. Les merges sont donc simplifiés
 
 
 ## Difficultées rencontrées
 
 - **Visual Studio For Mac / Xamarin Studio :**
 
-   VS for mac sait gérer tous ces formats mais ne propose pas forcément de templates de projets ou d'outil de convertion cohérent. Par exemple si on créer un nouveau projet .NetStandard, ça va utiliser les PackagesReferences, mais si on change juste le type de projet de PCL existant vers .NetStandard via les options, ça utilise le fichier project.json
+   VS for mac sait gérer tous ces formats mais ne propose pas forcément de templates de projets ou d'outil de convertion cohérent. Par exemple si on créer un nouveau projet .NetStandard, ça va utiliser le format PackagesReferences, mais si on change juste le type d'un projet PCL existant vers .NetStandard via les options, ça utilise le format project.json
 
 - **Outils en ligne de commande :**
 
-   Visiblement xbuild ne sait pas bien gérer les projets utilisant les PackageReference. En revanche il semble bien gérer les projets utilisant le project.json
+   Visiblement xbuild ne sait pas bien gérer les projets utilisant le format PackageReference. En revanche il semble bien gérer les projets utilisant le project.json
 
 - **Tests unitaires :**
 
@@ -42,7 +42,7 @@
 
 - **Nuget v2 :**
    
-   Dans les anciennes versions, les dépendances sont définient en double. Une fois dans le fichier packages.config pour la gestion avec Nuget et une fois dans le fichier csproj pour le link à la compilation. L'IDE s'occupe de garder cette cohérence lors des updates de package. On est donc "obligé" de passer par lui pour les mises à jour de packages ce qui peut prendre énormément de temps. Il ne gère pas non plus les dépendances transitive, donc si on dépend de A qui dépend lui même de B et de C, alors B et C apparait dans les différents fichier. L'IDE s'occupe tout de même d'ajouter les dépendances dans les différents fichier lui même
+   Dans les anciennes versions, les dépendances sont définient en double. Une fois dans le fichier packages.config pour la gestion avec Nuget et une fois dans le fichier csproj pour le link à la compilation. L'IDE s'occupe de garder cette cohérence lors des updates de package. On est donc "obligé" de passer par lui pour les mises à jour de packages ce qui peut prendre énormément de temps. Il ne gère pas non plus les dépendances transitives, donc si on dépend de A qui dépend lui même de B et de C, alors B et C apparaissent dans les différents fichiers. L'IDE s'occupe tout de même d'ajouter les dépendances transitives dans ces fichiers.
 
 
 *package.config :*
@@ -95,7 +95,7 @@
 
 - **Nuget v4 :**
 
-   Avec l'intégration à MSBuil, les packages sont référencés directement dans le fichier csproj sous forme de PackageReference. Là encore ça gère les dépendances transitive et seul une version "light" de la dépendance apparait
+   Avec l'intégration à MSBuil, les packages sont référencés directement dans le fichier csproj sous forme de PackageReference. Là encore ça gère les dépendances transitives et seule une version "light" de la dépendance apparait.
 
 *project.csproj :*
 ```xml
@@ -111,75 +111,9 @@
 </Project>
 ```
 
-
-## Format PackageReferences
-
-- **Création d'une lib**
-
-   Pour ce type de projet, VS for mac propose un template fonctionnel *Add New Project > .Net Core > Library > .Net Standard Library*
-
-- **Création d'une lib utilisant Xamarin Forms**
-
-   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut ajouter une config dans le csproj pour que ça fonctionne. Il faut ajouter le 'PackageTargetFallback'
-
-   ```xml
-   <Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-      <TargetFramework>netstandard1.4</TargetFramework>
-      <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
-      <DebugType>full</DebugType>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
-    </ItemGroup>
-  </Project>
-
-   ```
-
-
-- **Création d'un projet de test XUnit**
-
-   Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
-
-- **Création d'un projet de test NUnit**
-
-   Cette fois ci rien n'est proposé. Il faut créer un projet .NetStandard (voir ci-dessus) et modifier le fichier csproj de la façon suivante : 
-
-   ```xml
-   <Project Sdk="Microsoft.NET.Sdk">
-        <PropertyGroup>
-            <OutputType>Exe</OutputType>
-            <TargetFramework>netcoreapp1.1</TargetFramework>
-        </PropertyGroup>
-
-        <ItemGroup>
-            <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
-            <PackageReference Include="NUnit" Version="3.6.0" />
-            <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
-        </ItemGroup>
-    </Project>
-   ```
-
-   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug. De plus je n'ai pas vu de fichier de résultat des tests dans TestResult.xml non plus
-
-- **Création d'un projet Application Mobile + Xamarin Forms**
-
-   TODO
-
-- **Outils en ligne de commande**
-
-   *Build* : Pour builder un projet de ce type il faut utiliser msbuild à la place de xbuild.
-
-        msbuild project.sln
-
-   *Lancement des tests* : Il faut utiliser l'outil dotnet
-
-        dotnet restore
-        dotnet test project.Tests.csproj
-
 ## Format project.json
+
+A noter que ce format est maintenant déprécié depuis Visual Studio For Mac / Visual Studio 2017, et est remplacé par le format PackageReferences (voir ci après) 
 
 - **Création d'une lib**
 
@@ -187,7 +121,7 @@
    
 - **Création d'une lib utilisant Xamarin Forms**
 
-   Pour les même raison que précédement, il faut rajouter une configuration dans le project.json pour pouvoir ajouter Xamarin Forms dans un projet de ce type
+   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut rajouter une configuration dans le project.json pour pouvoir ajouter Xamarin Forms dans un projet de ce type
 
 ```json
 {
@@ -207,11 +141,11 @@
 
 - **Création d'un projet de test XUnit**
 
-   TODO
+   La création de projet XUnit sous ce format là n'est plus proposée par l'IDE et je n'ai pas réussit à les faire fonctionner avec une configuration qui été sensé marcher. Étant donné que ce format est déprécié je n'ai pas plus insisté
 
 - **Création d'un projet de test NUnit**
 
-   Il y avait un projet de runner ([NUnit 3 Test Runner for .NET Core](https://github.com/nunit/dotnet-test-nunit)) pour ce format mais il n'a pas été finalisé et a été abandonné pour le nouveau format PackageReference. [See Rob Prouse Post](http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/)
+   Il y avait un projet de runner ([NUnit 3 Test Runner for .NET Core](https://github.com/nunit/dotnet-test-nunit)) pour ce format mais il n'a pas été finalisé et a été abandonné pour le nouveau format PackageReference. [See Rob Prouse Post](http://www.alteridem.net/2016/06/18/nunit-3-testing-net-core-rc2/). Je n'ai pas non plus réussit à faire fonctionner un sample.
 
 - **Création d'un projet Application Mobile + Xamarin Forms**
 
@@ -274,6 +208,74 @@ Ajouter le fichier projet.json suivant :
 
 - **Outils en ligne de commande**
 
+   *Build* : Pour builder un projet de ce type on peut utiliser xbuild ou msbuild.
+
+        xbuild project.sln
+
+   *Lancement des tests* : Il faut utiliser l'outil dotnet
+
+        dotnet restore
+        dotnet test project.Tests.csproj
+
+
+## Format PackageReferences
+
+- **Création d'une lib**
+
+   Pour ce type de projet, VS for mac propose un template fonctionnel *Add New Project > .Net Core > Library > .Net Standard Library*
+
+- **Création d'une lib utilisant Xamarin Forms**
+
+   Xamarin Forms n'a pas encore été porté en .NetStandard, on ne peut donc pas l'ajouter si facilement dans les dépendances. Il faut ajouter une configuration dans le csproj pour que ça fonctionne. Il faut ajouter le 'PackageTargetFallback'
+
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <TargetFramework>netstandard1.4</TargetFramework>
+      <PackageTargetFallback>portable-net45+win8+wpa81+wp8</PackageTargetFallback>
+      <DebugType>full</DebugType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Xamarin.Forms" Version="2.3.4.247" />
+    </ItemGroup>
+  </Project>
+
+   ```
+
+
+- **Création d'un projet de test XUnit**
+
+   Là encore VS for mac propose un template fonctionnel *Add New Project > .Net Core > Tests > xUnit Test Project*
+
+- **Création d'un projet de test NUnit**
+
+   Cette fois ci rien n'est proposé. Il faut créer un projet .NetStandard (voir ci-dessus) et modifier le fichier csproj de la façon suivante : 
+
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+        <PropertyGroup>
+            <OutputType>Exe</OutputType>
+            <TargetFramework>netcoreapp1.1</TargetFramework>
+        </PropertyGroup>
+
+        <ItemGroup>
+            <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
+            <PackageReference Include="NUnit" Version="3.6.0" />
+            <PackageReference Include="NUnit3TestAdapter" Version="3.8.0-alpha1" />
+        </ItemGroup>
+    </Project>
+   ```
+
+   Le runner est en version alpha et ne fonctionne pas super bien dans VS for mac. J'ai régulièrement des problèmes de process de build qui ne se terminent pas et je n'ai pas réussi à lancer les tests NUnit en mode debug. De plus je n'ai pas vu de fichier de résultat des tests dans TestResult.xml non plus
+
+- **Création d'un projet Application Mobile + Xamarin Forms**
+
+   TODO
+
+- **Outils en ligne de commande**
+
    *Build* : Pour builder un projet de ce type il faut utiliser msbuild à la place de xbuild.
 
         msbuild project.sln
@@ -284,8 +286,8 @@ Ajouter le fichier projet.json suivant :
         dotnet test project.Tests.csproj
 
 
+## Références 
 
-https://oren.codes/2016/02/08/project-json-all-the-things/
-https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
-
-https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution
+- https://oren.codes/2016/02/08/project-json-all-the-things/
+- https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
+- https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution
