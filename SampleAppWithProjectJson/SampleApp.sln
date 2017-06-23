@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.iOS", "iOS\Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Droid", "Droid\SampleApp.Droid.csproj", "{D8408B8C-8992-446B-84E0-97229D780FE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleApp.Test", "SampleApp.Test\SampleApp.Test.csproj", "{A862F91C-20BF-4D81-955F-4EBEA866269F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,17 +53,5 @@ Global
 		{D8408B8C-8992-446B-84E0-97229D780FE3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{D8408B8C-8992-446B-84E0-97229D780FE3}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{D8408B8C-8992-446B-84E0-97229D780FE3}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|iPhone.Build.0 = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{A862F91C-20BF-4D81-955F-4EBEA866269F}.Debug|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal

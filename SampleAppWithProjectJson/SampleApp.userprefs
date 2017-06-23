@@ -1,9 +1,10 @@
-﻿<Properties StartupConfiguration="{D8408B8C-8992-446B-84E0-97229D780FE3}|Default">
+﻿<Properties StartupConfiguration="{AA8B6337-74DE-4992-9DBE-B767D0D228BB}|Default">
   <MonoDevelop.Ide.ItemProperties.SampleApp.Droid PreferredExecutionTarget="Android.Nexus_5X_API_25" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Droid/project.json">
+  <MonoDevelop.Ide.Workbench ActiveDocument="iOS/project.json">
     <Files>
-      <File FileName="iOS/project.json" Line="12" Column="2" />
+      <File FileName="SampleApp/project.json" Line="1" Column="1" />
       <File FileName="Droid/project.json" Line="1" Column="1" />
+      <File FileName="iOS/project.json" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

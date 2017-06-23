@@ -1,0 +1,11 @@
+
+plugins {
+  id "com.betomorrow.xamarin.application" version "0.3.0"
+}
+
+application {
+    appName "Com.ACME.SampleApp"
+    appVersion "1.0.0"
+    storeVersion "1"
+    packageName "com.acme.crossapp"
+}

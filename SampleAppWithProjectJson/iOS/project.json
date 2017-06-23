@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Autofac": "4.6.0",
     "Xamarin.Forms": "2.3.4.247"
   },
   "frameworks": {
