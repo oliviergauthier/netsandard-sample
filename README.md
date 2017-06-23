@@ -272,7 +272,16 @@ Ajouter le fichier projet.json suivant :
 
 - **Création d'un projet Application Mobile + Xamarin Forms**
 
-   TODO
+On va commencer par créer une nouvelle application en utilisant le template Blank Forms App
+On va ensuite convertir la partie PCL en procédant comme pour le format project.json
+Ensuite on va convertir les projets natifs
+Suppression des packages config
+Ajout des     :
+<CopyNuGetImplementations>true</CopyNuGetImplementations>
+<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+
+Lancer msbuild /t:restore
+Builder avec l'ide
 
 - **Outils en ligne de commande**
 
@@ -291,3 +300,4 @@ Ajouter le fichier projet.json suivant :
 - https://oren.codes/2016/02/08/project-json-all-the-things/
 - https://oren.codes/2017/04/23/using-xamarin-forms-with-net-standard-vs-2017-edition/
 - https://docs.microsoft.com/en-us/dotnet/core/tutorials/using-on-mac-vs-full-solution
+- http://blog.nuget.org/20170316/NuGet-now-fully-integrated-into-MSBuild.html
